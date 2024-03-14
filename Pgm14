@@ -1,0 +1,27 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+//import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Pgm14 {
+    public static void main(String[] args) throws InterruptedException {
+        // WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://www.hyrtutorials.com/p/basic-controls.html");
+
+        driver.findElement(By.id("firstName")).sendKeys("abcd");
+        driver.findElement(By.id("lastName")).sendKeys("xyz");
+        driver.findElement(By.id("femalerb")).click();
+        driver.findElement(By.id("englishchbx")).click();
+        driver.findElement(By.id("hindichbx")).click();
+        driver.findElement(By.id("email")).sendKeys("abcd@gmail.com");
+        driver.findElement(By.id("password")).sendKeys("abcd@123");
+        driver.findElement(By.id("registerbtn")).click();
+        Thread.sleep(5000);
+        driver.findElement(By.linkText("Click here to navigate to the home page")).click();
+        Thread.sleep(2000);
+        System.out.println("Exiting the program");
+        driver.quit();
+    }
+}
