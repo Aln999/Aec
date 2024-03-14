@@ -1,0 +1,23 @@
+import org.openqa.selenium.By; 
+import org.openqa.selenium.WebDriver; 
+import org.openqa.selenium.chrome.ChromeDriver; 
+ 
+public class App { 
+  
+ public static void main(String[] args)throws Exception { 
+  WebDriver driver=new ChromeDriver(); 
+  driver.get("http://www.google.com/"); 
+  driver.findElement(By.name("q")).sendKeys("genshin impact"); 
+  driver.findElement(By.name("btnK")).submit();
+  Thread.sleep(2000); 
+  driver.navigate().to("https://facebook.com"); 
+  driver.navigate().refresh(); 
+  Thread.sleep(2000); 
+  driver.navigate().back();
+  Thread.sleep(2000); 
+  driver.navigate().forward(); 
+  Thread.sleep(2000);
+  driver.quit(); 
+  
+ } 
+} 
