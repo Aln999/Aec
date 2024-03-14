@@ -1,0 +1,20 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class PgmguruChrome {
+    public static void main(String[] args) {
+        System.getProperty("webdriver.chrome.driver","C:\\Users\\tanvi\\OneDrive\\Documents\\5th sem\\AEC\\tool\\testing\\src\\drivers\\chromedriver.exe");
+        String baseUrl = "https://demo.guru99.com/test/upload/";
+        ChromeDriver driver = new ChromeDriver();
+
+        driver.get(baseUrl);
+        WebElement uploadElement = driver.findElement(By.id("uploadfile_0"));
+        uploadElement.sendKeys("file:///C:/Users/tanvi/OneDrive/Documents/5th%20sem/AEC/tool/testing/src/New.html");
+        driver.findElement(By.id("terms")).click();
+        driver.findElement(By.id("send")).click();
+
+    }
+    
+}
