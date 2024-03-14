@@ -1,0 +1,66 @@
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class Parallel {
+    WebDriver driver;
+
+    public Parallel() {
+        System.setProperty("webdriver.chrome.driver","C:\\Users\\tanvi\\OneDrive\\Documents\\5th sem\\AEC\\Software\\Test\\src\\Chrome\\chromedriver.exe");
+        System.setProperty("webdriver.gecko.driver","C:\\Users\\tanvi\\OneDrive\\Documents\\5th sem\\AEC\\Software\\Test\\src\\geckodriver-v0.34.0-win32\\geckodriver.exe");
+        System.setProperty("webdriver.edge.driver","C:\\Users\\tanvi\\OneDrive\\Documents\\5th sem\\AEC\\Project\\Project\\src\\Drivers\\msedgedriver.exe");
+    }
+    public static void main(String[] args) throws InterruptedException {
+        
+        // Create an ExecutorService to manage threads
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+
+        // Launch Chrome in a separate thread
+        executorService.execute(() -> {
+            try {
+                executeTest(new ChromeDriver(), "Chrome");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        // Launch Firefox in a separate thread
+        executorService.execute(() -> {
+            try {
+                executeTest(new FirefoxDriver(), "Firefox");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        // Launch Edge in a separate thread
+        executorService.execute(() -> {
+            try {
+                executeTest(new EdgeDriver(), "Edge");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        // Shut down the ExecutorService
+        executorService.shutdown();
+    }
+    public static void executeTest(WebDriver driver, String browser) throws InterruptedException {
+        //ProjectParallel app = new ProjectParallel();
+
+        driver.get("https://www.amazon.in/ ");
+        WebElement searchBox =  driver.findElement(By.id("twotabsearchtextbox"));
+		searchBox.sendKeys("Google Pixel");
+		searchBox.submit();
+        Thread.sleep(2000);
+        driver.quit();
+    }  
+
+
+}
