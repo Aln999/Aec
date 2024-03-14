@@ -1,0 +1,66 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class DataProj {
+
+    static void testBrowser(String user, String pass) throws InterruptedException {
+
+        // Initialize WebDriver (assuming ChromeDriver is installed)
+        WebDriver driver = new ChromeDriver();
+
+        try {
+            // Navigate to the login page
+            driver.get("https://www.amazon.in/");
+
+            // Find username and password fields and fill them
+            
+            driver.findElement(By.id("nav-link-accountList")).click();
+            WebElement emailField = driver.findElement(By.id("ap_email"));
+            emailField.sendKeys(user);
+		    emailField.submit();
+            WebElement passwordField = driver.findElement(By.id("ap_password"));
+            passwordField.sendKeys(pass);
+		    passwordField.submit();
+
+        } catch (Exception e) {
+            System.out.println("Error during test: " + e.getMessage());
+        } finally {
+            // Close the browser in any case (even if an exception occurs)
+            Thread.sleep(2000);
+            driver.quit();
+        }
+    }
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+        // CSV file path (assuming the file exists and is in the correct location)
+        String fileName = "src/dataDrivenProj.csv";
+
+        try (BufferedReader buff = new BufferedReader(new FileReader(fileName))) {
+            String record, user, pass;
+            while ((record = buff.readLine()) != null) {
+                // Split each line into username and password
+                String[] fields = record.split(",");
+                if (fields.length == 2) {
+                    user = fields[0];
+                    pass = fields[1];
+                    testBrowser(user, pass);
+                    Thread.sleep(2000); // Consider an alternative approach for waiting
+                } else {
+                    System.out.println("Invalid data format: " + record);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading CSV file: " + e.getMessage());
+        }
+    }
+}
+
+CSV File:-
+alnk8465@gmail.com,Alien123
+albk8465@gmail.com,Alien123
+alnk8465@gmail.com,Aln123
