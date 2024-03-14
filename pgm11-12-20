@@ -1,0 +1,31 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class App2 {
+    public static void main(String[] args) throws Exception {
+        System.out.println("Testing using chrome browser");
+        System.getProperty("webdriver.chrome.driver","C:\\Users\\tanvi\\OneDrive\\Documents\\5th sem\\AEC\\Software\\Test\\src\\Chrome\\chromedriver.exe");
+        ChromeDriver driver = new ChromeDriver();
+        driver.get("http://lms.nmit.ac.in/moodle/login/index.php");
+        WebElement Username= driver.findElement(By.id("username"));
+        Username.sendKeys("1NT21CS188");
+        WebElement Password= driver.findElement(By.id("password"));
+        Password.sendKeys("***");
+        WebElement Submit= driver.findElement(By.id("loginbtn"));
+        Submit.click();
+
+        System.out.println("Testing using firefox browser");
+        System.getProperty("webdriver.gecko.driver","C:\\Users\\tanvi\\OneDrive\\Documents\\5th sem\\AEC\\Software\\Test\\src\\geckodriver-v0.34.0-win32\\geckodriver.exe");
+        FirefoxDriver driver1 = new FirefoxDriver();
+        driver1.get("http://lms.nmit.ac.in/moodle/login/index.php");
+        WebElement Username1= driver.findElement(By.id("username"));
+        Username1.sendKeys("1NT21CS188");
+        WebElement Password1= driver.findElement(By.id("password"));
+        Password1.sendKeys("***");
+        WebElement Submit1= driver.findElement(By.id("loginbtn"));
+        Submit1.click();
+        }   
+}
+
